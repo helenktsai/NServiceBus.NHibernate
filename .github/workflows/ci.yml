@@ -63,6 +63,11 @@ jobs:
           name: NuGet packages
           path: nugets/
           retention-days: 7
+      - name: Install SQL Server
+        uses: Particular/install-sql-server-action@v1.0.0
+        with:
+          connection-string-env-var: SQLServerConnectionString
+          catalog: nservicebus
       - name: Azure login
         uses: azure/login@v1.4.0
         with:
