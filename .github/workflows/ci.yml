@@ -67,4 +67,6 @@ jobs:
           connection-string-env-var: SQLServerConnectionString
           catalog: nservicebus      
       - name: Run tests
-        uses: Particular/run-tests-action@v1.0.0
+        uses: Particular/run-tests-action@7c7edd66bd39ad0b9ce626af0a0529b3e6104b6b
+        with:
+          project-filter: "*Tests.csproj"
