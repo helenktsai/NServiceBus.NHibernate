@@ -69,4 +69,4 @@ jobs:
       - name: Run tests
         uses: Particular/run-tests-action@project-filter
         with:
-          project-filter: "*Tests.csproj"
+          path: src/NServiceBus.NHibernate.Tests/NServiceBus.NHibernate.Tests.csproj
