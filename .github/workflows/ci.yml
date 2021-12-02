@@ -45,22 +45,7 @@ jobs:
         uses: actions/checkout@v2.4.0
         with:
           ref: "refs/pull/${{ github.event.number }}/merge"
-          fetch-depth: 0          
-      - name: Install Oracle (Linux)
-        id: install-oracle
-        if: matrix.name == 'Linux'  
-        uses: azure/CLI@v1        
-        with:
-          azcliversion: 2.21.0                            
-          inlineScript: |
-            docker run -d -p 1521:1521 –-name oracle store/oracle/database-enterprise:12.2.0.1–slim
-      - name: Teardown SQL Server
-        uses: azure/CLI@v1
-        if: ${{ always() }}
-        with:
-          azcliversion: 2.21.0
-          inlineScript: |
-             az container delete --resource-group SomeResourceGroup --name ${{ steps.setup-sql-server.outputs.sqlinstance-instance }} --yes
+          fetch-depth: 0                
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v1.9.0
         with:
@@ -91,8 +76,8 @@ jobs:
         uses: azure/login@v1.4.0
         with:
           creds: ${{ secrets.AZURE_ACI_CREDENTIALS }}
-      - name: Setup infrastructure
-        id: setup-infrastructure
+      - name: Setup SQL infrastructure
+        id: setup-sql-infrastructure
         shell: pwsh
         run: |
           # Retrieve the Azure region in which this workflow is running. This region should be used to create addtional resources.
@@ -102,9 +87,9 @@ jobs:
           $rgName = "GitHubActions-RG"
           echo "::set-output name=rgName::$rgName"
           $rand = Get-Random
-          $accountname = "pswabs$($rand)"
+          $accountname = "pswnh$($rand)"
           echo "::set-output name=accountname::$accountname"
-          $storageAccount = az storage account create --location $region --name $accountname --resource-group $rgName --sku Standard_LRS | ConvertFrom-Json
+          $storageAccount = az group create --location $region --name $accountname --resource-group $rgName --sku Standard_LRS | ConvertFrom-Json
           $keys = az storage account keys list --account-name $accountname --resource-group $rgName | ConvertFrom-Json
           $key = $keys[0].value
           echo "::add-mask::$key"
@@ -121,5 +106,5 @@ jobs:
         shell: pwsh
         run: |
           # Provide a PowerShell script that will shutdown/clean up any dependent infrastructure that has been set up.
-          # Any output parameters specified in the setup stage can be accessed by using {{steps.setup-infrastructure.outputs.key}}
-          az storage account delete --resource-group ${{ steps.setup-infrastructure.outputs.rgName }} --name ${{ steps.setup-infrastructure.outputs.accountname }} --yes
+          # Any output parameters specified in the setup stage can be accessed by using {{steps.setup-sql-infrastructure.outputs.key}}
+          az storage account delete --resource-group ${{ steps.setup-sql-infrastructure.outputs.rgName }} --name ${{ steps.setup-sql-infrastructure.outputs.accountname }} --yes
