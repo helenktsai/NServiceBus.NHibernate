@@ -36,11 +36,11 @@ jobs:
           APP_USER_PASSWORD: Welcome1
         ports:
           - 1521:1521
-      options: >-
-        --health-cmd healthcheck.sh
-        --health-interval 10s
-        --health-timeout 5s
-        --health-retries 10
+        options: >-
+          --health-cmd healthcheck.sh
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10    services:
     steps:
       - name: Check for secrets
         env:
