@@ -84,7 +84,5 @@ jobs:
         with:
           connection-string-env-var: SQLServerConnectionString
           catalog: nservicebus      
-      - name: Run Oracle tests
-        uses: Particular/run-tests-action@project-filter
-        with:
-          path: src/NServiceBus.NHibernate.AcceptanceTests-Oracle/NServiceBus.NHibernate.AcceptanceTests-Oracle.csproj   
+      - name: Run all tests
+        uses: Particular/run-tests-action@v1.0.0
