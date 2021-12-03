@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net472;netcoreapp3.1;net5.0</TargetFramework>  
     <RootNamespace>NServiceBus.NHibernate.AcceptanceTests.Oracle</RootNamespace>
   </PropertyGroup>
 
