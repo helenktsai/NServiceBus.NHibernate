@@ -34,6 +34,7 @@ jobs:
           ORACLE_RANDOM_PASSWORD: true
           APP_USER: particular
           APP_USER_PASSWORD: Welcome1
+          OracleConnectionString: Data Source=(DESCRIPTION=(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 127.0.0.1)(PORT = 1521)))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = XE)));User Id=particular; Password=Welcome1; Enlist=dynamic
         ports:
           - 1521:1521
         options: >-
