@@ -29,7 +29,7 @@ jobs:
       fail-fast: false
     services:
       oracle:
-        image: gvenzl/oracle-xs:latest
+        image: gvenzl/oracle-xe:latest
         env:
           ORACLE_RANDOM_PASSWORD: true
           APP_USER: particular
