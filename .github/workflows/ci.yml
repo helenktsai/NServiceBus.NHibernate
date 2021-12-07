@@ -85,23 +85,5 @@ jobs:
         with:
           connection-string-env-var: SQLServerConnectionString
           catalog: nservicebus      
-      - name: Run Basic tests
-        uses: Particular/run-tests-action@project-filter
-        with:
-          path: src/NServiceBus.NHibernate.Tests/NServiceBus.NHibernate.Tests.csproj
-      - name: Run Acceptance tests
-        uses: Particular/run-tests-action@project-filter
-        with:
-          path: src/NServiceBus.NHibernate.AcceptanceTests/NServiceBus.NHibernate.AcceptanceTests.csproj
-      - name: Run Persistence tests
-        uses: Particular/run-tests-action@project-filter
-        with:
-          path: src/NServiceBus.NHibernate.PersistenceTests/NServiceBus.NHibernate.PersistenceTests.csproj
-      - name: Run SqlTransport tests
-        uses: Particular/run-tests-action@project-filter
-        with:
-          path: src/NServiceBus.NHibernate.AcceptanceTests-SqlTransportTests/NServiceBus.NHibernate.AcceptanceTests-SqlTransportTests.csproj          
-      - name: Run Oracle tests
-        uses: Particular/run-tests-action@project-filter
-        with:
-          path: src/NServiceBus.NHibernate.AcceptanceTests-Oracle/NServiceBus.NHibernate.AcceptanceTests-Oracle.csproj          
+      - name: Run tests
+        uses: Particular/run-tests-action@v1.0.0
