@@ -32,7 +32,7 @@ jobs:
       oracle:
         image: gvenzl/oracle-xe:latest
         env:
-          ORACLE_RANDOM_PASSWORD: true
+          ORACLE_PASSWORD: Welcome1
           APP_USER: particular
           APP_USER_PASSWORD: Welcome1
         ports:
