@@ -77,5 +77,7 @@ jobs:
         with:
           connection-string-env-var: SQLServerConnectionString
           catalog: nservicebus      
-      - name: Run all tests
-        run: dotnet test src --configuration Release --no-build --logger "GitHubActions;report-warnings=false" -m:1
+      - name: Run Basic tests
+        uses: Particular/run-tests-action@project-filter
+        with:
+          path: src/NServiceBus.NHibernate.Tests/NServiceBus.NHibernate.Tests.csproj
