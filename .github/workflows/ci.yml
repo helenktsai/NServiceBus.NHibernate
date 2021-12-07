@@ -101,3 +101,7 @@ jobs:
         uses: Particular/run-tests-action@project-filter
         with:
           path: src/NServiceBus.NHibernate.AcceptanceTests-SqlTransportTests/NServiceBus.NHibernate.AcceptanceTests-SqlTransportTests.csproj          
+      - name: Run Oracle tests
+        uses: Particular/run-tests-action@project-filter
+        with:
+          path: src/NServiceBus.NHibernate.AcceptanceTests-Oracle/NServiceBus.NHibernate.AcceptanceTests-Oracle.csproj          
