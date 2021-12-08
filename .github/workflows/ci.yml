@@ -32,6 +32,7 @@ jobs:
             name: Linux
       fail-fast: false
     services:
+      if: matrix.name == 'Linux'
       oracle:
         image: gvenzl/oracle-xe:latest
         env:
