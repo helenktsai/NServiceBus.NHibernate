@@ -20,7 +20,7 @@ public class ConfigureEndpointNHibernatePersistence : IConfigureEndpointTestExec
         };
 
         var connectionString = Environment.GetEnvironmentVariable("OracleConnectionString");
-        
+
         config.UsePersistence<NHibernatePersistence>()
             .ConnectionString(connectionString)
             .SagaTableNamingConvention(type =>

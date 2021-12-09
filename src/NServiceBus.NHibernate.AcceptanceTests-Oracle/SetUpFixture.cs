@@ -14,4 +14,4 @@ public class SetUpFixture
             Assert.Ignore("Ignoring Oracle test");
         }
     }
-} 
+}
