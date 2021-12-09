@@ -14,7 +14,6 @@ on:
   workflow_dispatch:
 env:
   DOTNET_NOLOGO: true
-  OracleConnectionString: "Data Source=(DESCRIPTION=(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 127.0.0.1)(PORT = 1521)))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = XE)));User Id=SYSTEM; Password=Welcome1; Enlist=dynamic"
 jobs:
   build:
     if:
@@ -31,21 +30,6 @@ jobs:
           - os: ubuntu-20.04
             name: Linux
       fail-fast: false
-    services:
-      if: matrix.name == 'Linux'
-      oracle:
-        image: gvenzl/oracle-xe:latest
-        env:
-          ORACLE_PASSWORD: Welcome1
-          APP_USER: particular
-          APP_USER_PASSWORD: Welcome1
-        ports:
-          - 1521:1521
-        options: >-
-          --health-cmd healthcheck.sh
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 10
     steps:
       - name: Check for secrets
         env:
@@ -89,5 +73,11 @@ jobs:
         with:
           connection-string-env-var: SQLServerConnectionString
           catalog: nservicebus      
+      - name: Setup Oracle 
+        if: matrix.name == "Linux"
+        shell: bash
+        run: |
+          docker run -d -p 1521:1521 -e ORACLE_PASSWORD=Welcome1 gvenzl/oracle-xe
+          echo "OracleConnectionString='Data Source=(DESCRIPTION=(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 127.0.0.1)(PORT = 1521)))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = XE)));User Id=SYSTEM; Password=Welcome1; Enlist=dynamic'" >> $GITHUB_ENV
       - name: Run tests
         uses: Particular/run-tests-action@v1.0.0
