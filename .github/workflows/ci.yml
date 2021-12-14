@@ -27,10 +27,6 @@ jobs:
         with:
           ref: "refs/pull/${{ github.event.number }}/merge"
           fetch-depth: 0   
-      - name: Setup .NET 6 
-        uses: actions/setup-dotnet@v1.9.0
-        with:
-          dotnet-version: 6.0.x
       - name: Setup .NET 5 
         uses: actions/setup-dotnet@v1.9.0
         with:
@@ -57,7 +53,7 @@ jobs:
         if: matrix.name == 'Linux'
         shell: bash
         run: |
-          docker run -d -p 1521:1521 -e ORACLE_PASSWORD=Welcome1 gvenzl/oracle-xe
+          docker run -d --name <oracle-db> container-registry.oracle.com/database/express:18.4.0.0
           echo "OracleConnectionString=Data Source=(DESCRIPTION=(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 127.0.0.1)(PORT = 1521)))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = XE)));User Id=SYSTEM; Password=Welcome1; Enlist=dynamic" >> $GITHUB_ENV
           sleep 20
       - name: Run tests
