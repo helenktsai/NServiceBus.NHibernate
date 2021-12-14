@@ -43,12 +43,7 @@ jobs:
         with:
           name: NuGet packages
           path: nugets/
-          retention-days: 7
-      - name: Install SQL Server
-        uses: Particular/install-sql-server-action@v1.0.0
-        with:
-          connection-string-env-var: SQLServerConnectionString
-          catalog: nservicebus      
+          retention-days: 7    
       - name: Setup Oracle 
         if: matrix.name == 'Linux'
         shell: bash
