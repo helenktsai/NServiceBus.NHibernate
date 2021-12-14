@@ -53,7 +53,7 @@ jobs:
         if: matrix.name == 'Linux'
         shell: bash
         run: |
-          docker run -d --name <oracle-db> container-registry.oracle.com/database/express:18.4.0.0
+          docker run -d --name <oracle-db> container-registry.oracle.com/database/18.4.0-xe
           echo "OracleConnectionString=Data Source=(DESCRIPTION=(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 127.0.0.1)(PORT = 1521)))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = XE)));User Id=SYSTEM; Password=Welcome1; Enlist=dynamic" >> $GITHUB_ENV
           sleep 20
       - name: Run tests
