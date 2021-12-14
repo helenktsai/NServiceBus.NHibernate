@@ -50,6 +50,6 @@ jobs:
         run: |
           docker run -d --name oracledb -p 1521:1521 -e ORACLE_PASSWORD=Welcome1 container-registry.oracle.com/database/express:latest
           echo "OracleConnectionString=Data Source=(DESCRIPTION=(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 127.0.0.1)(PORT = 1521)))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = XE)));User Id=SYSTEM; Password=Welcome1; Enlist=dynamic" >> $GITHUB_ENV
-          sleep 240
+          sleep 800
       - name: Run tests
         uses: Particular/run-tests-action@v1.0.0
